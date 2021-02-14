@@ -1,0 +1,20 @@
+on: [push]
+
+jobs:
+  strongdm_register_job:
+    runs-on: ubuntu-latest
+    name: Register Website With strongDM
+    steps:
+      - name: Registration
+        id: register
+        uses: awiesner4/strongdm-github-action@v1
+        with:
+          sdm_base_type: "httpBasic"
+          sdm_base_apiAccessKey: ${{ secrets.APIACCESSKEY }}
+          sdm_base_apiSecretKey: ${{ secrets.APISECRETKEY }}
+          sdm_values_name: "gha-test-website"
+          sdm_values_username: admin
+          sdm_values_password: ${{ secrets.GRAFANA_PASSWORD }}
+          sdm_values_url: "https://grafana.staging.starburstgalaxy.net"
+          sdm_values_subdomain: "gha-test-subdomain"
+          sdm_values_healthcheckPath: "/"

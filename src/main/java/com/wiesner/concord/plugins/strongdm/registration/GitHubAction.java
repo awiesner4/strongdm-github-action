@@ -17,18 +17,19 @@ public class GitHubAction {
         HashMap sdmValuesMap = new HashMap();
 
         for (String envName : env.keySet()) {
-            if (envName.contains("sdm_values_")) {
-                sdmValuesMap.put(envName.replace("sdm_values_", ""), env.get(envName));
+            if (envName.toLowerCase().contains("input_sdm_values_")) {
+                sdmValuesMap.put(envName.replace("input_sdm_values_", ""), env.get(envName));
             }
 
-            if (envName.contains("sdm_base_")) {
-                sdmMap.put(envName.replace("sdm_base_", ""), env.get(envName));
+            if (envName.toLowerCase().contains("input_sdm_base_")) {
+                sdmMap.put(envName.replace("input_sdm_base_", ""), env.get(envName));
             }
         }
 
         sdmMap.put("values", sdmValuesMap);
 
         MapBackedVariables input = new MapBackedVariables(sdmMap);
+
 
 //        TestOutput testOutput = new TestOutput();
 //        testOutput.execute(input);
