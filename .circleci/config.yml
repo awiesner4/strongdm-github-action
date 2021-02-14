@@ -1,0 +1,11 @@
+version: 2
+executorType: machine
+jobs:
+  build:
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: concord-{{ checksum "pom.xml" }}
+
+      - run: ./mvnw -B clean install
