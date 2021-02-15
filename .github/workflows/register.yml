@@ -3,16 +3,16 @@ on: [push]
 jobs:
   register_job:
     runs-on: ubuntu-latest
-    env:
-      sdm_base_type: "httpBasic"
-      sdm_base_apiAccessKey: ${{ secrets.APIACCESSKEY }}
-      sdm_base_apiSecretKey: ${{ secrets.APISECRETKEY }}
-      sdm_values_name: "als-test-gha-write"
-      sdm_values_username: "admin"
-      sdm_values_password: ${{ secrets.GRAFANA_PASSWORD }}
-      sdm_values_url: "https://grafana.staging.starburstgalaxy.net"
-      sdm_values_subdomain: "als-test-gha-write"
-      sdm_values_healthcheckPath: "/"
+#    env:
+#      sdm_base_type: "httpBasic"
+#      sdm_base_apiAccessKey: ${{ secrets.APIACCESSKEY }}
+#      sdm_base_apiSecretKey: ${{ secrets.APISECRETKEY }}
+#      sdm_values_name: "als-test-gha-write"
+#      sdm_values_username: "admin"
+#      sdm_values_password: ${{ secrets.GRAFANA_PASSWORD }}
+#      sdm_values_url: "https://grafana.staging.starburstgalaxy.net"
+#      sdm_values_subdomain: "als-test-gha-write"
+#      sdm_values_healthcheckPath: "/"
     steps:
       - name: Docker login v2
         run: echo ${{ secrets.HARBOR_PASSWORD }} | docker login harbor.starburstdata.net -u ${{ secrets.HARBOR_USER }} --password-stdin
