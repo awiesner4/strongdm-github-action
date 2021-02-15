@@ -1,45 +1,45 @@
 # action.yml
 name: 'strongDM Registration'
 description: 'Register the strongDM resource'
-#inputs:
-#  sdm_base_type: # id of input
-#    description: 'type of strongDM resource to create;'
-#    required: true
-#  sdm_base_apiAccessKey:  # id of input
-#    description: 'strongDM API Access Key'
-#    required: true
-#  sdm_base_apiSecretKey:  # id of input
-#    description: 'strongDM API Access Key'
-#    required: true
-#  sdm_values_name:
-#    description: 'name to give strongDM resource'
-#    required: true
-#  sdm_values_username:
-#    description: "username for sdm website access"
-#    required: false
-#  sdm_values_password:
-#    description: "password for sdm website access"
-#    required: false
-#  sdm_values_url:
-#    description: "url of website to access"
-#    required: false
-#  sdm_values_subdomain:
-#    description: "unique subdomain for url endpoint"
-#    required: false
-#  sdm_values_healthcheckPath:
-#    description: "healthcheckPath for website resource"
-#    required: false
-#    default: "/"
+inputs:
+  sdm_base_type: # id of input
+    description: 'type of strongDM resource to create;'
+    required: true
+  sdm_base_apiAccessKey:  # id of input
+    description: 'strongDM API Access Key'
+    required: true
+  sdm_base_apiSecretKey:  # id of input
+    description: 'strongDM API Access Key'
+    required: true
+  sdm_values_name:
+    description: 'name to give strongDM resource'
+    required: true
+  sdm_values_username:
+    description: "username for sdm website access"
+    required: false
+  sdm_values_password:
+    description: "password for sdm website access"
+    required: false
+  sdm_values_url:
+    description: "url of website to access"
+    required: false
+  sdm_values_subdomain:
+    description: "unique subdomain for url endpoint"
+    required: false
+  sdm_values_healthcheckPath:
+    description: "healthcheckPath for website resource"
+    required: false
+    default: "/"
 runs:
   using: 'docker'
   image: 'Dockerfile'
-#  args:
-#    - ${{ inputs.sdm_base_type }}
-#    - ${{ inputs.sdm_base_apiAccessKey }}
-#    - ${{ inputs.sdm_base_apiSecretKey }}
-#    - ${{ inputs.sdm_values_name }}
-#    - ${{ inputs.sdm_values_username }}
-#    - ${{ inputs.sdm_values_password }}
-#    - ${{ inputs.sdm_values_url }}
-#    - ${{ inputs.sdm_values_subdomain }}
-#    - ${{ inputs.sdm_values_healthcheckPath }}
+  args:
+    - ${{ inputs.sdm_base_type }}
+    - ${{ inputs.sdm_base_apiAccessKey }}
+    - ${{ inputs.sdm_base_apiSecretKey }}
+    - ${{ inputs.sdm_values_name }}
+    - ${{ inputs.sdm_values_username }}
+    - ${{ inputs.sdm_values_password }}
+    - ${{ inputs.sdm_values_url }}
+    - ${{ inputs.sdm_values_subdomain }}
+    - ${{ inputs.sdm_values_healthcheckPath }}
