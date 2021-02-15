@@ -11,35 +11,35 @@ inputs:
   sdm_base_apiSecretKey:  # id of input
     description: 'strongDM API Access Key'
     required: true
-  sdm_values_name:
+  sdm_values_name: # id of input
     description: 'name to give strongDM resource'
     required: true
-  sdm_values_username:
+  sdm_values_username: # id of input
     description: "username for sdm website access"
     required: false
-  sdm_values_password:
+  sdm_values_password: # id of input
     description: "password for sdm website access"
     required: false
-  sdm_values_url:
+  sdm_values_url: # id of input
     description: "url of website to access"
     required: false
-  sdm_values_subdomain:
+  sdm_values_subdomain: # id of input
     description: "unique subdomain for url endpoint"
     required: false
-  sdm_values_healthcheckPath:
+  sdm_values_healthcheckPath: # id of input
     description: "healthcheckPath for website resource"
     required: false
     default: "/"
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.sdm_base_type }}
-    - ${{ inputs.sdm_base_apiAccessKey }}
-    - ${{ inputs.sdm_base_apiSecretKey }}
-    - ${{ inputs.sdm_values_name }}
-    - ${{ inputs.sdm_values_username }}
-    - ${{ inputs.sdm_values_password }}
-    - ${{ inputs.sdm_values_url }}
-    - ${{ inputs.sdm_values_subdomain }}
-    - ${{ inputs.sdm_values_healthcheckPath }}
+  env:
+    sdm_base_type: ${{ inputs.sdm_base_type }}
+    sdm_base_apiAccessKey: ${{ inputs.sdm_base_apiAccessKey }}
+    sdm_base_apiSecretKey: ${{ inputs.sdm_base_apiSecretKey }}
+    sdm_values_name: ${{ inputs.sdm_values_name }}
+    sdm_values_username: ${{ inputs.sdm_values_username }}
+    sdm_values_password: ${{ inputs.sdm_values_password }}
+    sdm_values_url: ${{ inputs.sdm_values_url }}
+    sdm_values_subdomain: ${{ inputs.sdm_values_subdomain }}
+    sdm_values_healthcheckPath: ${{ inputs.sdm_values_healthcheckPath }}
