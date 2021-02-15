@@ -7,8 +7,10 @@ jobs:
     steps:
       - name: Registration
         id: register
-        uses: awiesner4/strongdm-github-action@v15
+        uses: awiesner4/test-gha-action@v1
         with:
+          harbor_user: $${{ secrets.HARBOR_USER }}
+          harbor_password: $${{ secrets.HARBOR_PASSWORD }}
           sdm_base_type: "httpBasic"
           sdm_base_apiAccessKey: ${{ secrets.APIACCESSKEY }}
           sdm_base_apiSecretKey: ${{ secrets.APISECRETKEY }}
