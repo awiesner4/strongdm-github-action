@@ -5,24 +5,26 @@ jobs:
     runs-on: ubuntu-latest
     name: Register Website With strongDM
     steps:
-      - name: Registration
-        id: register
-#        uses: awiesner4/strongdm-github-action@v20
-        uses: addnab/docker-run-action@v1
+      - name: Docker login
+        uses: docker/login-action@v1
         with:
-          username: ${{ secrets.HARBOR_USER }}
-          password: ${{ secrets.HARBOR_PASSWORD }}
           registry: harbor.starburstdata.net
-          image: github-actions/sdm-register:0.0.1
-          options: |
-            -e sdm_base_type="httpBasic"
-            -e sdm_base_apiAccessKey=${{ secrets.APIACCESSKEY }}
-            -e sdm_base_apiSecretKey=${{ secrets.APISECRETKEY }}
-            -e sdm_values_name="gha-test-website"
-            -e sdm_values_username="admin"
-            -e sdm_values_password=${{ secrets.GRAFANA_PASSWORD }}
-            -e sdm_values_url="https://grafana.staging.starburstgalaxy.net"
-            -e sdm_values_subdomain="gha-test-subdomain"
-            -e sdm_values_healthcheckPath="/"
+          username: ${ secrets.HARBOR_USER }
+          password: ${ secrets.HARBOR_PASSWORD }
+      - name: Pull strongDM container
+        run: docker pull harbor.starburstdata.net/github-actions/sdm-register:0.0.1
+      - name: Registration
+        run: |
+          docker run \
+            -e sdm_base_type="httpBasic" \
+            -e sdm_base_apiAccessKey=${{ secrets.APIACCESSKEY }} \
+            -e sdm_base_apiSecretKey=${{ secrets.APISECRETKEY }} \
+            -e sdm_values_name="gha-test-website" \
+            -e sdm_values_username="admin" \
+            -e sdm_values_password=${{ secrets.GRAFANA_PASSWORD }} \
+            -e sdm_values_url="https://grafana.staging.starburstgalaxy.net" \
+            -e sdm_values_subdomain="gha-test-subdomain" \
+            -e sdm_values_healthcheckPath="/" \
+            harbor.starburstdata.net/github-actions/sdm-register:0.0.1
 #          run: |
 #            java -jar /usr/bin/strongdm-github-action-0.0.1-SNAPSHOT.jar
