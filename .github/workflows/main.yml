@@ -21,8 +21,10 @@ jobs:
     steps:
 #      - name: Register strongDM resource
 #        uses: docker://harbor.starburstdata.net/github-actions/sdm-register:0.0.1
-      - name: Docker login
+      - name: Docker login v2
         run: echo ${{ secrets.HARBOR_PASSWORD }} | docker login harbor.starburstdata.net -u ${{ secrets.HARBOR_USER }} --password-stdin
+      - name: Pull strongDM container
+        run: docker pull harbor.starburstdata.net/github-actions/sdm-register:0.0.1
       - name: Register strongDM resource
         uses: docker://harbor.starburstdata.net/github-actions/sdm-register:0.0.1
         env:
