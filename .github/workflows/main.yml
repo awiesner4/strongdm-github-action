@@ -12,9 +12,7 @@ jobs:
           username: ${ secrets.HARBOR_USER }
           password: ${ secrets.HARBOR_PASSWORD }
       - name: Pull strongDM container
-        container:
-          image: harbor.starburstdata.net/github-actions/sdm-register:0.0.1
-#        run: docker pull harbor.starburstdata.net/github-actions/sdm-register:0.0.1
+        run: docker pull harbor.starburstdata.net/github-actions/sdm-register:0.0.1 --username ${ secrets.HARBOR_USER } --password ${ secrets.HARBOR_PASSWORD }
       - name: Registration
         run: |
           docker run \
