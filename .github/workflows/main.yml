@@ -8,7 +8,7 @@ jobs:
       - name: Registration
         id: register
         uses: awiesner4/strongdm-github-action@v2
-        with:
+        env:
           sdm_base_type: "httpBasic"
           sdm_base_apiAccessKey: ${{ secrets.APIACCESSKEY }}
           sdm_base_apiSecretKey: ${{ secrets.APISECRETKEY }}
