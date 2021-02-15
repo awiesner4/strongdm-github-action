@@ -1,6 +1,6 @@
 # action.yml
 name: 'strongDM Registration'
-description: 'Greet someone and record the time'
+description: 'Register the strongDM resource'
 inputs:
   sdm_base_type: # id of input
     description: 'type of strongDM resource to create;'
@@ -33,13 +33,13 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.sdm_base_type }}
-    - ${{ inputs.sdm_base_apiAccessKey }}
-    - ${{ inputs.sdm_base_apiSecretKey }}
-    - ${{ inputs.sdm_values_name }}
-    - ${{ inputs.sdm_values_username }}
-    - ${{ inputs.sdm_values_password }}
-    - ${{ inputs.sdm_values_url }}
-    - ${{ inputs.sdm_values_subdomain }}
-    - ${{ inputs.sdm_values_healthcheckPath }}
+#  args:
+#    - ${{ inputs.sdm_base_type }}
+#    - ${{ inputs.sdm_base_apiAccessKey }}
+#    - ${{ inputs.sdm_base_apiSecretKey }}
+#    - ${{ inputs.sdm_values_name }}
+#    - ${{ inputs.sdm_values_username }}
+#    - ${{ inputs.sdm_values_password }}
+#    - ${{ inputs.sdm_values_url }}
+#    - ${{ inputs.sdm_values_subdomain }}
+#    - ${{ inputs.sdm_values_healthcheckPath }}
