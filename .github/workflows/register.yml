@@ -1,7 +1,7 @@
 on: [push]
 
 jobs:
-  strongdm_register_job:
+  register_job:
     runs-on: ubuntu-latest
     steps:
       - name: Docker login v2
