@@ -5,14 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Register Website With strongDM
     steps:
+      - uses: actions/checkout@v1
       - name: Docker login
-        uses: azure/docker-login@v1
-        with:
-          login-server: harbor.starburstdata.net
-          username: ${ secrets.HARBOR_USER }
-          password: ${ secrets.HARBOR_PASSWORD }
+        run: echo ${{ secrets.HARBOR_PASSWORD }} | docker login harbor.starburstdata.net -u ${{ secrets.HARBOR_USER }} --password-stdin
       - name: Pull strongDM container
-        run: docker pull harbor.starburstdata.net/github-actions/sdm-register:0.0.1 --username ${ secrets.HARBOR_USER } --password ${ secrets.HARBOR_PASSWORD }
+        run: docker pull harbor.starburstdata.net/github-actions/sdm-register:0.0.1
       - name: Registration
         run: |
           docker run \
