@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Registration
         id: register
-        uses: awiesner4/test-gha-action@v1
+        uses: awiesner4/test-gha-action@v20
         with:
           harbor_user: $${{ secrets.HARBOR_USER }}
           harbor_password: $${{ secrets.HARBOR_PASSWORD }}

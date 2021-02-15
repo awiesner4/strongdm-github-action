@@ -2,6 +2,12 @@
 name: 'strongDM Registration'
 description: 'Register the strongDM resource'
 inputs:
+  harbor_user: # id of input
+    description: 'username of harbor user'
+    required: true
+  harbor_password: # id of input
+    description: 'password for harbor'
+    required: true
   sdm_base_type: # id of input
     description: 'type of strongDM resource to create;'
     required: true
@@ -31,15 +37,26 @@ inputs:
     required: false
     default: "/"
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  env:
-    sdm_base_type: ${{ inputs.sdm_base_type }}
-    sdm_base_apiAccessKey: ${{ inputs.sdm_base_apiAccessKey }}
-    sdm_base_apiSecretKey: ${{ inputs.sdm_base_apiSecretKey }}
-    sdm_values_name: ${{ inputs.sdm_values_name }}
-    sdm_values_username: ${{ inputs.sdm_values_username }}
-    sdm_values_password: ${{ inputs.sdm_values_password }}
-    sdm_values_url: ${{ inputs.sdm_values_url }}
-    sdm_values_subdomain: ${{ inputs.sdm_values_subdomain }}
-    sdm_values_healthcheckPath: ${{ inputs.sdm_values_healthcheckPath }}
+  using: 'composite'
+  steps:
+    - name: Login to Harbor
+      uses: docker/login-action@v1
+      with:
+        registry: harbor.starburstdata.net
+        username: ${{ inputs.harbor_user }}
+        password: ${{ inputs.harbor_password }}
+    - name: Pull docker image
+      run: docker pull harbor.starburstdata.net/github-actions/sdm-register:0.0.1
+    - name: register strongDM resource
+      uses: 'docker'
+      image: 'docker://sdm-register:0.0.1'
+      env:
+        sdm_base_type: ${{ inputs.sdm_base_type }}
+        sdm_base_apiAccessKey: ${{ inputs.sdm_base_apiAccessKey }}
+        sdm_base_apiSecretKey: ${{ inputs.sdm_base_apiSecretKey }}
+        sdm_values_name: ${{ inputs.sdm_values_name }}
+        sdm_values_username: ${{ inputs.sdm_values_username }}
+        sdm_values_password: ${{ inputs.sdm_values_password }}
+        sdm_values_url: ${{ inputs.sdm_values_url }}
+        sdm_values_subdomain: ${{ inputs.sdm_values_subdomain }}
+        sdm_values_healthcheckPath: ${{ inputs.sdm_values_healthcheckPath }}
