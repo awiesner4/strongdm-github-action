@@ -8,19 +8,20 @@ jobs:
       credentials:
         username: ${{ secrets.HARBOR_USER }}
         password: ${{ secrets.HARBOR_PASSWORD }}
+      env:
+        sdm_base_type: "httpBasic"
+        sdm_base_apiAccessKey: ${{ secrets.APIACCESSKEY }}
+        sdm_base_apiSecretKey: ${{ secrets.APISECRETKEY }}
+        sdm_values_name: "als-test-gha-write"
+        sdm_values_username: "admin"
+        sdm_values_password: ${{ secrets.GRAFANA_PASSWORD }}
+        sdm_values_url: "https://grafana.staging.starburstgalaxy.net"
+        sdm_values_subdomain: "als-test-gha-write"
+        sdm_values_healthcheckPath: "/"
     steps:
       - name: Register strongDM resource
         uses: docker://harbor.starburstdata.net/github-actions/sdm-register:0.0.1
-        env:
-          sdm_base_type: "httpBasic"
-          sdm_base_apiAccessKey: ${{ secrets.APIACCESSKEY }}
-          sdm_base_apiSecretKey: ${{ secrets.APISECRETKEY }}
-          sdm_values_name: "als-test-gha-write"
-          sdm_values_username: "admin"
-          sdm_values_password: ${{ secrets.GRAFANA_PASSWORD }}
-          sdm_values_url: "https://grafana.staging.starburstgalaxy.net"
-          sdm_values_subdomain: "als-test-gha-write"
-          sdm_values_healthcheckPath: "/"
+
 
 #    name: Register Website With strongDM
 #    steps:
