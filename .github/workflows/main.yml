@@ -6,9 +6,9 @@ jobs:
     name: Register Website With strongDM
     steps:
       - name: Docker login
-        uses: docker/login-action@v1
+        uses: azure/docker-login@v1
         with:
-          registry: harbor.starburstdata.net
+          login-server: harbor.starburstdata.net
           username: ${ secrets.HARBOR_USER }
           password: ${ secrets.HARBOR_PASSWORD }
       - name: Pull strongDM container
