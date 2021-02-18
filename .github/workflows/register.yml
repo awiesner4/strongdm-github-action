@@ -3,53 +3,14 @@ on: [push]
 jobs:
   register_job:
     runs-on: ubuntu-latest
-#    env:
-#      sdm_base_type: "httpBasic"
-#      sdm_base_apiAccessKey: ${{ secrets.APIACCESSKEY }}
-#      sdm_base_apiSecretKey: ${{ secrets.APISECRETKEY }}
-#      sdm_values_name: "als-test-gha-write"
-#      sdm_values_username: "admin"
-#      sdm_values_password: ${{ secrets.GRAFANA_PASSWORD }}
-#      sdm_values_url: "https://grafana.staging.starburstgalaxy.net"
-#      sdm_values_subdomain: "als-test-gha-write"
-#      sdm_values_healthcheckPath: "/"
     steps:
-      - name: Docker login v2
-        run: echo ${{ secrets.HARBOR_PASSWORD }} | docker login harbor.starburstdata.net -u ${{ secrets.HARBOR_USER }} --password-stdin
-      - name: Pull strongDM container
-        run: docker pull harbor.starburstdata.net/github-actions/sdm-register:0.0.1
-      - name: Registration
+#      - name: GHA Node Info
+#        run: wget -qO- http://instance-data/latest/meta-data/instance-id
+      - uses: actions/checkout@v2
+      - name: Find Workdir
         run: |
-          docker run \
-            -e sdm_base_type="httpBasic" \
-            -e sdm_base_apiAccessKey=${{ secrets.APIACCESSKEY }} \
-            -e sdm_base_apiSecretKey=${{ secrets.APISECRETKEY }} \
-            -e sdm_values_name="gha-test-website" \
-            -e sdm_values_username="admin" \
-            -e sdm_values_password=${{ secrets.GRAFANA_PASSWORD }} \
-            -e sdm_values_url="https://grafana.staging.starburstgalaxy.net" \
-            -e sdm_values_subdomain="gha-test-subdomain" \
-            -e sdm_values_healthcheckPath="/" \
-            harbor.starburstdata.net/github-actions/sdm-register:0.0.1
-#      - name: Register strongDM resource
-#        uses: docker://harbor.starburstdata.net/github-actions/sdm-register:0.0.1
-#        env:
-#          sdm_base_type: "httpBasic"
-#          sdm_base_apiAccessKey: ${{ secrets.APIACCESSKEY }}
-#          sdm_base_apiSecretKey: ${{ secrets.APISECRETKEY }}
-#          sdm_values_name: "als-test-gha-write"
-#          sdm_values_username: "admin"
-#          sdm_values_password: ${{ secrets.GRAFANA_PASSWORD }}
-#          sdm_values_url: "https://grafana.staging.starburstgalaxy.net"
-#          sdm_values_subdomain: "als-test-gha-write"
-#          sdm_values_healthcheckPath: "/"
-
-
-
-#    name: Register Website With strongDM
-#    steps:
-#      - uses: actions/checkout@v1
-#      - name: Docker login
+          pwd && ls -la
+#      - name: Docker login v2
 #        run: echo ${{ secrets.HARBOR_PASSWORD }} | docker login harbor.starburstdata.net -u ${{ secrets.HARBOR_USER }} --password-stdin
 #      - name: Pull strongDM container
 #        run: docker pull harbor.starburstdata.net/github-actions/sdm-register:0.0.1
@@ -57,6 +18,7 @@ jobs:
 #        run: |
 #          docker run \
 #            -e sdm_base_type="httpBasic" \
+#            -e sdm_base_action="delete" \
 #            -e sdm_base_apiAccessKey=${{ secrets.APIACCESSKEY }} \
 #            -e sdm_base_apiSecretKey=${{ secrets.APISECRETKEY }} \
 #            -e sdm_values_name="gha-test-website" \
@@ -66,5 +28,3 @@ jobs:
 #            -e sdm_values_subdomain="gha-test-subdomain" \
 #            -e sdm_values_healthcheckPath="/" \
 #            harbor.starburstdata.net/github-actions/sdm-register:0.0.1
-##          run: |
-##            java -jar /usr/bin/strongdm-github-action-0.0.1-SNAPSHOT.jar
